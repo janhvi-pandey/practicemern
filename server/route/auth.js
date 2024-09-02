@@ -38,7 +38,7 @@ router.post('/login',async(req,res)=>{
                 return res.status(200).json({alreadyexist:true,token:token,user:userexist});
             }
             else{
-                return res.status(400).json({alreadyexist:false,token:null,user:null});
+                return res.status(400).json({alreadyexist:true,token:null,user:null});
             }
         }
         return res.status(400).json({alreadyexist:false,message:"user does not exist"});
@@ -50,10 +50,10 @@ router.post('/login',async(req,res)=>{
 
 router.get('/userprofile',userauth, async(req,res)=>{
     try {
-        console.log(req.user.id);
+        
         
         const userdata = await User.findById(req.user.id);
-        console.log(userdata);
+        
         
         if (userdata) {
           return res.json(userdata);
